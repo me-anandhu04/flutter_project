@@ -1,30 +1,49 @@
 import 'package:flutter/material.dart';
-import 'data_storage_page.dart';
-import 'table_data.dart';
+import 'history_page.dart';
+import 'table_details_page.dart';
 
 class TableListPage extends StatelessWidget {
-  final List<TableData> tableList;
+  final int tableCount;
 
-  TableListPage({required this.tableList});
+  TableListPage({required this.tableCount});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Select Table')),
-      body: ListView.builder(
-        itemCount: tableList.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(tableList[index].tableName),
-            onTap: () {
-              // Navigate to data storage page when a table is clicked
+      appBar: AppBar(
+        title: Text('Table List'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.history),
+            onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => DataStoragePage(tableData: tableList[index]),
-                ),
+                MaterialPageRoute(builder: (context) => HistoryPage()),
               );
             },
+          ),
+        ],
+      ),
+      body: ListView.builder(
+        itemCount: tableCount,
+        itemBuilder: (context, index) {
+          return Card(
+            margin: EdgeInsets.all(8.0),
+            color: Colors.blue,
+            child: ListTile(
+              title: Text(
+                'Table ${index + 1}',
+                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => TableDetailsPage(tableName: 'Table ${index + 1}'),
+                  ),
+                );
+              },
+            ),
           );
         },
       ),
