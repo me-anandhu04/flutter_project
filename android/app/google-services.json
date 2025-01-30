@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "839651545510",
+    "project_id": "wtmanagement-b4597",
+    "storage_bucket": "wtmanagement-b4597.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:839651545510:android:cf0097e673e5bde39fbf67",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkBCsUkVZhEO5NGDpecCkzy9wk4wlokfA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

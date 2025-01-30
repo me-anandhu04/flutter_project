@@ -101,6 +101,7 @@ class HistoryPage extends StatelessWidget {
                   dataManager.tableTransactions.remove(tableName);
                 }
                 Navigator.of(context).pop(); // Close the dialog
+                // ignore: invalid_use_of_protected_member
                 (context as Element).reassemble(); // Refresh the UI
               },
               child: Text('Delete', style: TextStyle(color: Colors.red)),

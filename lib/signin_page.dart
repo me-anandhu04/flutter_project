@@ -1,6 +1,6 @@
-// TODO Implement this library.import 'package:flutter/material.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'table_input_page.dart';  // Import your table_input.dart page
 
 class SignInPage extends StatefulWidget {
   @override
@@ -8,70 +8,54 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
-  // Controller for the username and password fields
-  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  // Method to handle Sign In
-  void _signIn() {
-    String username = _usernameController.text;
-    String password = _passwordController.text;
+  void _signIn() async {
+    String email = _emailController.text.trim();
+    String password = _passwordController.text.trim();
 
-    if (username.isEmpty || password.isEmpty) {
-      // Show error if fields are empty
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Please enter both username and password")),
+    if (email.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please enter both email and password")));
+      return;
+    }
+
+    try {
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Sign-in successful")));
+
+      // Navigate to Table Input Page after successful sign-in
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => TableInputPage()),
       );
-    } else {
-      // Handle Sign In logic here (e.g., validate credentials)
-      print("Username: $username, Password: $password");
-      // You can replace this with actual sign-in logic like authentication API calls.
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Sign-in failed: $e")));
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Sign In',
-          style: TextStyle(
-            fontSize: 24, // Customize font size as needed
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        backgroundColor: Colors.blue, // Customize the AppBar color
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: Text('Sign In')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Username TextField
             TextField(
-              controller: _usernameController,
-              decoration: InputDecoration(
-                labelText: 'Username',
-                border: OutlineInputBorder(),
-              ),
+              controller: _emailController,
+              decoration: InputDecoration(labelText: 'Email', border: OutlineInputBorder()),
             ),
             SizedBox(height: 20),
-            // Password TextField
             TextField(
               controller: _passwordController,
-              obscureText: true, // Hide password text
-              decoration: InputDecoration(
-                labelText: 'Password',
-                border: OutlineInputBorder(),
-              ),
+              obscureText: true,
+              decoration: InputDecoration(labelText: 'Password', border: OutlineInputBorder()),
             ),
             SizedBox(height: 30),
-            // Sign In Button
-            ElevatedButton(
-              onPressed: _signIn,
-              child: Text('Sign In'),
-            ),
+            ElevatedButton(onPressed: _signIn, child: Text('Sign In')),
           ],
         ),
       ),

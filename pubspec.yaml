@@ -5,12 +5,14 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.6.1
+  sdk: ">=3.6.1 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.8
+  firebase_core: ^3.10.1  # Latest stable version
+  firebase_auth: ^5.4.1  # Latest stable version
+  cloud_firestore: ^5.6.2 # Latest Firestore version
 
 dev_dependencies:
   flutter_test:
@@ -20,5 +22,5 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/waiter.png
-  
+    - assets\waiter.jpeg
+
