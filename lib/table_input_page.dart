@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'history_page.dart';
+
 import 'table_list_page.dart';
 
 class TableInputPage extends StatefulWidget {
+  const TableInputPage({super.key});
+
   @override
   _TableInputPageState createState() => _TableInputPageState();
 }
@@ -13,10 +15,10 @@ class _TableInputPageState extends State<TableInputPage> {
   final TextEditingController _tableController = TextEditingController();
 
   // Controllers to edit the user information
-  TextEditingController _userNameController = TextEditingController();
-  TextEditingController _userEmailController = TextEditingController();
-  TextEditingController _userPasswordController = TextEditingController();
-  TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _userNameController = TextEditingController();
+  final TextEditingController _userEmailController = TextEditingController();
+  final TextEditingController _userPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
 
   // Current user details
   String userName = '';
