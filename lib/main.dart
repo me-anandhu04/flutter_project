@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_2/home%20_page.dart';
 import 'package:flutter_application_2/signin_page.dart';
 import 'package:flutter_application_2/signup_page.dart';
+import 'package:flutter_application_2/table_input_page.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -14,6 +15,8 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
