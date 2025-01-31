@@ -11,10 +11,14 @@ class TableListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Table List'),
+        title: Text(
+          'Table List',
+          style: TextStyle(color: Colors.white), // Set AppBar title text color to white
+        ),
+        backgroundColor: Colors.blue, // Set AppBar background color to blue
         actions: [
           IconButton(
-            icon: Icon(Icons.history),
+            icon: Icon(Icons.history, color: Colors.white), // Set the history icon color to white
             onPressed: () {
               Navigator.push(
                 context,
@@ -24,28 +28,31 @@ class TableListPage extends StatelessWidget {
           ),
         ],
       ),
-      body: ListView.builder(
-        itemCount: tableCount,
-        itemBuilder: (context, index) {
-          return Card(
-            margin: EdgeInsets.all(8.0),
-            color: Colors.blue,
-            child: ListTile(
-              title: Text(
-                'Table ${index + 1}',
-                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+      body: Container(
+        color: Colors.orange, // Set the body background color to orange
+        child: ListView.builder(
+          itemCount: tableCount,
+          itemBuilder: (context, index) {
+            return Card(
+              margin: EdgeInsets.all(8.0),
+              color: Colors.blue, // Set card color to blue
+              child: ListTile(
+                title: Text(
+                  'Table ${index + 1}',
+                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold), // Set text color to white
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => TableDetailsPage(tableName: 'Table ${index + 1}'),
+                    ),
+                  );
+                },
               ),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => TableDetailsPage(tableName: 'Table ${index + 1}'),
-                  ),
-                );
-              },
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

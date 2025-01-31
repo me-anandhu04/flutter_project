@@ -58,45 +58,104 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Sign Up')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ListView(
-          children: [
-            TextField(
-              controller: _nameController,
-              decoration: InputDecoration(labelText: 'Name', border: OutlineInputBorder()),
+      appBar: AppBar(
+        title: Text('Sign Up'),
+        backgroundColor: Colors.blue, // App bar color is blue
+      ),
+      body: Stack(
+        children: [
+          // Background image
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/waiter.jpeg'), // Make sure to have waiter.jpeg in the assets folder
+                fit: BoxFit.cover,
+              ),
             ),
-            SizedBox(height: 16),
-            TextField(
-              controller: _emailController,
-              decoration: InputDecoration(labelText: 'Email', border: OutlineInputBorder()),
+          ),
+          // Content on top of the background
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: ListView(
+                shrinkWrap: true,
+                children: [
+                  TextField(
+                    controller: _nameController,
+                    decoration: InputDecoration(
+                      labelText: 'Name',
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blue), // Blue border
+                      ),
+                      filled: true,
+                      fillColor: Colors.red, // Red background
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  TextField(
+                    controller: _emailController,
+                    decoration: InputDecoration(
+                      labelText: 'Email',
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blue), // Blue border
+                      ),
+                      filled: true,
+                      fillColor: Colors.red, // Red background
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  TextField(
+                    controller: _passwordController,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      labelText: 'Password',
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blue), // Blue border
+                      ),
+                      filled: true,
+                      fillColor: Colors.red, // Red background
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  TextField(
+                    controller: _confirmPasswordController,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      labelText: 'Confirm Password',
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blue), // Blue border
+                      ),
+                      filled: true,
+                      fillColor: Colors.red, // Red background
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: _signUp,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue, // Blue background for the button
+                      side: BorderSide(color: Colors.red), // Red border
+                      padding: EdgeInsets.symmetric(vertical: 15),
+                    ),
+                    child: Text(
+                      'Sign Up',
+                      style: TextStyle(color: Colors.white), // White text color
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(context, '/signin');
+                    },
+                    child: Text(
+                      "Already have an account? Sign in",
+                      style: TextStyle(color: const Color.fromARGB(255, 132, 12, 243)), // White text color
+                    ),
+                  ),
+                ],
+              ),
             ),
-            SizedBox(height: 16),
-            TextField(
-              controller: _passwordController,
-              obscureText: true,
-              decoration: InputDecoration(labelText: 'Password', border: OutlineInputBorder()),
-            ),
-            SizedBox(height: 16),
-            TextField(
-              controller: _confirmPasswordController,
-              obscureText: true,
-              decoration: InputDecoration(labelText: 'Confirm Password', border: OutlineInputBorder()),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _signUp,
-              child: Text('Sign Up'),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, '/signin');
-              },
-              child: Text("Already have an account? Sign in"),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
